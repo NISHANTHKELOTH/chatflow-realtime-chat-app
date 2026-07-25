@@ -4,11 +4,10 @@ ChatFlow is a full-stack real-time private messaging web application where users
 
 The application uses **React** for the frontend, **Node.js + Express.js** for the backend, **MongoDB Atlas** for persistent data storage, and **Socket.IO** for real-time messaging.
 
-## 🌐 Live Demo
+## 🚀 Live Demo
 
-**ChatFlow:** 
-
-🚀 https://chatflow-realtime-chat-app-git-main-nishanth-projects.vercel.app
+**Live Application:**  
+[https://chatflow-realtime-chat-app-git-main-nishanth-projects.vercel.app](https://chatflow-realtime-chat-7569uqlyw-nishanth-projects.vercel.app?utm_source=chatgpt.com)
 
 > The backend is hosted on Render's free tier, so the first request after a period of inactivity may take some time while the server wakes up.
 

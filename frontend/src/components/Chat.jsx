@@ -22,7 +22,6 @@ function Chat({ user, onLogout }) {
   useEffect(() => {
     const registerUser = () => {
       console.log("Socket connected:", socket.id);
-
       socket.emit("register_user", user.id);
     };
 
@@ -47,18 +46,11 @@ function Chat({ user, onLogout }) {
       ]);
     };
 
-    socket.on(
-      "receive_private_message",
-      receiveMessage
-    );
+    socket.on("receive_private_message", receiveMessage);
 
     return () => {
       socket.off("connect", registerUser);
-
-      socket.off(
-        "receive_private_message",
-        receiveMessage
-      );
+      socket.off("receive_private_message", receiveMessage);
     };
   }, [user.id]);
 
@@ -87,9 +79,7 @@ function Chat({ user, onLogout }) {
   // Open Add User popup
   const openAddUser = async () => {
     try {
-      const response = await fetch(
-        `${API_URL}/api/users`
-      );
+      const response = await fetch(`${API_URL}/api/users`);
 
       const data = await response.json();
 
@@ -111,11 +101,9 @@ function Chat({ user, onLogout }) {
         `${API_URL}/api/users/${user.id}/contacts`,
         {
           method: "POST",
-
           headers: {
             "Content-Type": "application/json",
           },
-
           body: JSON.stringify({
             contactId,
           }),
@@ -126,7 +114,6 @@ function Chat({ user, onLogout }) {
 
       if (response.ok) {
         await getContacts();
-
         setShowAddUser(false);
         setAddSearch("");
       } else {
@@ -256,9 +243,7 @@ function Chat({ user, onLogout }) {
               type="text"
               placeholder="Search chats..."
               value={search}
-              onChange={(e) =>
-                setSearch(e.target.value)
-              }
+              onChange={(e) => setSearch(e.target.value)}
             />
           </div>
 
@@ -269,39 +254,30 @@ function Chat({ user, onLogout }) {
             + Add User
           </button>
 
-          <p className="chats-title">
-            CHATS
-          </p>
+          <p className="chats-title">CHATS</p>
 
           {/* Contact list */}
           <div className="users-list">
 
             {filteredContacts.length === 0 ? (
               <div className="no-users">
-
                 <p>No chats yet</p>
 
                 <span>
                   Click + Add User to start chatting.
                 </span>
-
               </div>
             ) : (
               filteredContacts.map((person) => (
                 <div
                   key={person._id}
-
                   className={
                     selectedUser?._id === person._id
                       ? "user-item active-user"
                       : "user-item"
                   }
-
-                  onClick={() =>
-                    selectUser(person)
-                  }
+                  onClick={() => selectUser(person)}
                 >
-
                   <div className="user-avatar">
                     {person.username
                       .charAt(0)
@@ -309,15 +285,9 @@ function Chat({ user, onLogout }) {
                   </div>
 
                   <div className="user-info">
-                    <h4>
-                      {person.username}
-                    </h4>
-
-                    <p>
-                      {person.email}
-                    </p>
+                    <h4>{person.username}</h4>
+                    <p>{person.email}</p>
                   </div>
-
                 </div>
               ))
             )}
@@ -334,6 +304,14 @@ function Chat({ user, onLogout }) {
               {/* Chat header */}
               <div className="conversation-header">
 
+                {/* Mobile Back Button */}
+                <button
+                  className="mobile-back-button"
+                  onClick={() => setSelectedUser(null)}
+                >
+                  ←
+                </button>
+
                 <div className="conversation-user">
 
                   <div className="user-avatar">
@@ -343,13 +321,8 @@ function Chat({ user, onLogout }) {
                   </div>
 
                   <div>
-                    <h3>
-                      {selectedUser.username}
-                    </h3>
-
-                    <p>
-                      {selectedUser.email}
-                    </p>
+                    <h3>{selectedUser.username}</h3>
+                    <p>{selectedUser.email}</p>
                   </div>
 
                 </div>
@@ -367,9 +340,7 @@ function Chat({ user, onLogout }) {
                         .toUpperCase()}
                     </div>
 
-                    <h2>
-                      {selectedUser.username}
-                    </h2>
+                    <h2>{selectedUser.username}</h2>
 
                     <p>
                       Send a message to start your conversation.
@@ -386,7 +357,6 @@ function Chat({ user, onLogout }) {
                       return (
                         <div
                           key={msg._id || index}
-
                           className={
                             isMine
                               ? "message-row my-message-row"
@@ -402,9 +372,7 @@ function Chat({ user, onLogout }) {
                             }
                           >
 
-                            <p>
-                              {msg.message}
-                            </p>
+                            <p>{msg.message}</p>
 
                             <span className="message-time">
                               {new Date(
@@ -527,13 +495,8 @@ function Chat({ user, onLogout }) {
                       </div>
 
                       <div className="modal-user-info">
-                        <h4>
-                          {person.username}
-                        </h4>
-
-                        <p>
-                          {person.email}
-                        </p>
+                        <h4>{person.username}</h4>
+                        <p>{person.email}</p>
                       </div>
 
                       <button

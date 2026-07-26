@@ -16,23 +16,37 @@ const app = express();
 const server = http.createServer(app);
 
 // ==============================
+// ALLOWED FRONTEND URLS
+// ==============================
+
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://chatflow-realtime-chat-app.vercel.app",
+];
+
+// ==============================
 // SOCKET.IO SETUP
 // ==============================
 
 const io = new Server(server, {
   cors: {
-    origin: process.env.CLIENT_URL,
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
     credentials: true,
   },
 });
 
+// ==============================
+// EXPRESS CORS
+// ==============================
+
 app.use(
   cors({
-    origin: process.env.CLIENT_URL,
+    origin: allowedOrigins,
     credentials: true,
   })
 );
+
 app.use(express.json());
 
 // ==============================
@@ -138,11 +152,10 @@ app.post("/api/auth/login", async (req, res) => {
       });
     }
 
-    const isPasswordCorrect =
-      await bcrypt.compare(
-        password,
-        user.password
-      );
+    const isPasswordCorrect = await bcrypt.compare(
+      password,
+      user.password
+    );
 
     if (!isPasswordCorrect) {
       return res.status(400).json({

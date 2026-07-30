@@ -33,7 +33,7 @@ https://chatflow-realtime-chat-app.vercel.app
 ### Clone the repository
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/chatflow.git
+git clone [https://github.com/YOUR_USERNAME/chatflow.git](https://github.com/NISHANTHKELOTH/chatflow-realtime-chat-app.git)
 ```
 
 ### Go to the project folder
